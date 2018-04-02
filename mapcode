@@ -1,0 +1,42 @@
+# All this is R script by the way
+# For the map markers, I used symbols in a custom font
+# You'll need to download the font "icomoon" that I included in the repository, install it on your computer, and restart your computer
+# If all goes well, the map will look like the preview image I included in the repository as well
+
+
+install.packages("extrafont")
+library(extrafont)
+font_import(pattern="icomoon", prompt=TRUE) #importing the map marker symbol font
+
+extrafont::loadfonts(device="pdf")
+extrafont::loadfonts(device="postscript")
+extrafont::loadfonts(device="win") # not entirely sure if all these are needed but getting this font to work for the map marker symbols took me forever and finally worked when I used all these although it seems redundant to me, but it worked so.. yolo?
+windowsFonts(icomoon=windowsFont("icomoon")) # all this is for the "symbol font" called "icomoon" that I used for the map markers of the lakes
+
+install.packages("maps")
+library(maps)
+
+install.packages("mapdata")
+library(mapdata)
+
+install.packages("devtools")
+library(devtools)
+
+install.packages("ggplot2")
+library(ggplot2)
+
+install.packages("ggmap")
+library(ggmap)
+
+devtools::install_github("mikey-harper/ggmapstyles", force=TRUE) # this is really cool, it allows for custom map styles from snazzymaps.com, you can change the "theme" or "style" of the map just by replacing the url in the ggmap code below with any other style from the snazzymap site
+library(ggmapstyles)
+
+ggmap(get_snazzymap("Ottawa, Canada", zoom=8, mapRef = "https://snazzymaps.com/style/93/lost-in-the-desert"))+ # The map background, can be changed for a different style if you would prefer
+  geom_text(aes(x=-75.6972,y=45.4215),label="Ottawa", nudge_y = 0.1, size = 5, family = "Calibri")+ # Ottawa label
+  geom_text(aes(x=-74.634998,y=46.141313),label="Lac Duhamel",nudge_y=0.18,size=4.3, family = "Calibri")+ # Lac Duhamel label
+  geom_text(aes(x=-75.532051,y=46.458819),label="Lac-des-Iles",nudge_y=0.09,nudge_x=0.39,size=4.3, family = "Calibri")+ # Lac-des-Iles label
+  geom_text(aes(x=-77.286973,y=44.477278),label="Stoco Lake",nudge_y=0.09,nudge_x=0.36,size=4.3, family = "Calibri")+ # Stoco Lake label
+  geom_text(aes(x=-76.906359,y=45.677891),label="Muskrat Lake",nudge_y=0.18,size=4.3, family = "Calibri")+ # Muskrat Lake label
+  geom_text(aes(x=-76.4860,y=44.2312),label="Kingston", nudge_y = 0.12, size = 5, family = "Calibri")+ # Kingston label
+  geom_text(aes(x=c(-74.634998,-75.532051,-77.286973,-76.906359),y=c(46.141313,46.458819,44.477278,45.677891)),label=c("a","a","a","a"),family="icomoon",size=6,colour="red")+ # location markers of the lakes
+  theme(axis.text.x = element_blank(),axis.text.y = element_blank(),axis.ticks = element_blank(),axis.title = element_blank()) # removing the latitude and longitude axis and labels as they are unecessary in my opinion
