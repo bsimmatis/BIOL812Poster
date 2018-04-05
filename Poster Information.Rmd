@@ -1,0 +1,66 @@
+---
+title: "Poster Information"
+author: "BIOL812"
+date: "April 20, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem  
+
+* Lack of water quality information to establish reference conditions increases uncertainty in management targets  
+* Monitoring is typically reactive and starts after an impact has already occurred  
+  + For example: large cyanobacterial blooms are detected so studies examine nutrient sources and modern lake water chemistry.  
+
+## Paleolimnology  
+* Uses biological, physical and chemical indicators preserved in lake sediments to reconstruct past environmental changes.  
+* Visible Range Spectroscopy (VRS) can be used to infer past whole-lake the concentrations of chlorophyll *a* and its degradation products.  
+  
+[chlorophyll *a* + derivatives] = 0.0919$\times$peak area*~650-700nm~*+0.0011
+  
+## Research Questions and Significance
+  
+We aim to explore the environmental histories of previously unmonitored lakes to inform local lake managers and present exploratory results from the application of machine learning to paleolimnological spectral data and chlorophyll *a* reconstructions.
+  
+1. Does chlorophyll *a* change over time in each lake?  
+2. Can we differentiate absorbance values from lakes grouped by trophic status or depth using machine learning?
++ If so, are the primary differences in the photosynthetically active radiation (PAR) range, or are they in other biologically-relevant spectra?
+  
+## Methods  
+* Cores were dated at PEARL via gamma spectroscopy and calculated using a Constant Rate of Supply (CRS) Model using ^210^Pb activities.  
+* A Model 6500 series Rapid Content Analyzer at PEARL was used to produce the absorbance values for our study lakes.
+
+### Data Layout 
+#### PAR Layout
+* **Column 1-51**: values from the spectrophotometer for wavelengths 400-2500nm, measured every 2nm.
+* **Column 52**: Midpoint depth of the sediment interval.
+
+#### FullVRS Layout
+* **Column 1**: Sampled wavelengths (400-2500nm).
+* **Column 2-n**: Absorbance values for sampled intervals (in first row as midpoint depth in cm).
+
+## Study Sites
+  
+ Lake | Coring Depth | Trophic Status | Bedrock Geology 
+------|--------------|----------------|-----------------
+Stoco | 12m | Eutrophic | Canadian Shield/Limestone   
+Muskrat | 33m | Eutrophic | Canadian Shield/Limestone   
+Duhamel | 26m | Oligotrophic | Canadian Shield   
+Lac-des-Iles | 37m | Oligo-mesotrophic | Canadian Shield  
+
+
+```{r}
+  
+# Collin's code and maps here
+
+```
+
+## References
+Michelutti N, Blais JM, Cumming BF, Paterson AM, Ruhland K, Wolfe AP, Smol JP (2010) Do spectrally inferred determinations of chlorophyll a reflect trends in lake trophic status? Journal of Paleolimnology 43: 208-217
+  
+Michelutti N, Smol JP (2016) Visible spectroscopy reliably tracks trends in paleo production. Journal of Paleolimnology 56: 253-265
+  
+Wolfe AP, Vinebrooke RD, Michelutti N, Rivard B, Das B (2006) Experimental calibration of lake-sediment spectral reflectance to chlorophyll a concentrations: methodology and paleolimnological validation. Journal of Paleolimnology 36: 91-100 
