@@ -29,8 +29,8 @@ The simulated data was generated according to a variation on Agent-based modelli
 * Full spectrum absorbance values for four lakes
 * "Chlorophyll a" spectrum (650-700nm) absorbance values for four lakes
 * Location information for the focal lakes
+* Description of the model and simulated data can be found in the "Biol 812 Group Project" folder
 
-[STEF'S INFO HERE]
 
 #### Code Included in this Repository:
 * Custom Chlorophyll a function
@@ -38,7 +38,7 @@ The simulated data was generated according to a variation on Agent-based modelli
 * Full wavelength range codes, with plot options for raw data, density, and raster images (using ggplot2 in R)
 * Code to generate map of sediment cores
 * [LEIF'S INFO HERE]
-* [STEF'S INFO HERE]
+* Simulation: Python code for game theoretical mathematical model. 
 
 ### References
 1. Appleby, P.G., and Oldfield, F. 1978. The calculation of lead-210 dates assuming a constant rate of supply of unsupported 210Pb to the sediment. Catena, 5:1-8.
