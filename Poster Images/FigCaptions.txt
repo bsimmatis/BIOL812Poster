@@ -1,0 +1,12 @@
+## Brigitte's Figures, organized by file name
+## These could be combined into one four-panel plot to save room with repetitive figure captions.
+# LP06133_chla_plot.jpeg : VRS-Inferred chlorophyll a through the depth of the sediment core from lake 06-133 (Lac Duhamel). Chlorophyll a is expressed as mg/g dry weight of sediment.
+# LP06137_chla_plot.jpeg : VRS-Inferred chlorophyll a through the depth of the sediment core from lake 06-137 (Lac-Des-Iles). Chlorophyll a is expressed as mg/g dry weight of sediment.
+# LP08160_chla_plot.jpeg : VRS-Inferred chlorophyll a through the depth of the sediment core from lake 08-160 (Stoco Lake). Chlorophyll a is expressed as mg/g dry weight of sediment.
+# MUSK_chla_plot.jpect : VRS-Inferred chlorophyll a through the depth of the sediment core from Muskrat Lake. Chlorophyll a is expressed as mg/g dry weight of sediment.
+
+## Stef's Figures
+# [FIGURE CAPTIONS GO HERE]
+
+## Leif's Figures
+# [FIGURE CAPTIONS GO HERE]
