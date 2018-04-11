@@ -22,6 +22,8 @@ Paleolimnological approaches use a variety of biological, physical and chemical 
   
 The data is comprised of a series of absorbance values from 400-2,500nm through time, which broadly represents the proportion of organic matter in the sediment. The absorbance values demonstrate the type of algae present in the lake depending on where absorbance peaks through the spectra (e.g. chlorophyll a is expected to occur between 650-700nm, representing whole-lake primary production). Each sediment interval has 2100 values and each lake core can have over 30 intervals of sediment stored in 2D datasets. Our largest data set, Muskrat Lake, has 71 intervals of sediment with 2100 values per interval for a total of ~72 000 data points. 
 
+The simulated data was generated according to a variation on Agent-based modelling (ABM) that is commonly used in ecology, referred to as invidivual-based modelling (IBM). In particular, using a modified game theoretical model, the parameter of resource division was used to simulate the evolution of an algae population in a lake according to individual behavior. The data obtained was used to make predictions about how an enviroment may change with respect to Chlorophyll a, given certain environmental conditions and an initial measure of Chlorophyll a.
+
 #### Data Included in this Repository:
 * Dating profiles for each sediment core, which was generated using a constant rate of 210-Pb supply model via ScienTissiME
 * Full spectrum absorbance values for four lakes
