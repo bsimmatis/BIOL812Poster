@@ -6,9 +6,8 @@
 
 #### Purpose and Organization of Repository
 We aim to determine whether:
-1. Chlorophyll a changes over time in each lake, 
-2. Whether we can “fingerprint” deep vs shallow eutrophic lakes, and, if so, whether the differences correlate to the wavelengths of known specific pigments, and
-3. [STEF'S QUESTIONS HERE]
+1. Chlorophyll a changes over time in each lake and, 
+2. Whether we can “fingerprint” deep vs shallow eutrophic lakes, and, if so, whether the differences correlate to the wavelengths of known specific pigments.
   
 This repository includes R and Python code to address these questions, depending on the component. All data, images and text files were uplodaded using Git bash.
 
