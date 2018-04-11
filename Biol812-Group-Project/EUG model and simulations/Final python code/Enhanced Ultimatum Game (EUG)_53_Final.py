@@ -1,17 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
 #-----------------------
 #define variables
 resource = 20           #Amount of resource to be divided
 cost = 0              #Cost for demanding more than MA
 runs = 1                #Number of interactions
 popsize = 100          #population size/Number of algae
-generations = 500        #Number of generations
+generations = 1000       #Number of generations
 tsize = 4              #Tournament size
 pmr=0.05            #Point mutation rate for proposal
 mdr=0.5             #Point mutation rate for demand and MA
-epoch=20                 #Number of generations in an epoch
+epoch=20               #Number of generations in an epoch
 
 #def getKey1(item):
 #    return(item[money+2])
@@ -19,7 +18,7 @@ epoch=20                 #Number of generations in an epoch
 #Defines Main loop where characteristics of each alga is created
 def main():
 #   Create loop for interactions
-   for r in range(runs):
+    for r in range(runs):
         Algaearray = []
 #        runPepoch = []
         for i in range(popsize):
@@ -57,6 +56,11 @@ def main():
 
 #-------------------------
 #Algae interactions. Each algae interacts with each other (once as proposer and again as demander)
+        runPepoch = []
+        maximum = []
+        minimum = []
+#        RUNPepoch = []
+#        Finalavg =[]
         for g in range(generations):       
             for k in range(popsize):
                 algae1 = k
@@ -174,25 +178,39 @@ def main():
         
         # ----------------------------Calculate Averages  
         #       Reset fitness score to zero
-            for a in range(popsize):
-               Algaearray[a][resource+2]=0
+            #for a in range(popsize):
+               #Algaearray[a][resource+2]=0
         #       Create empty arrays to append averages
-            runPepoch = []
-            RUNPepoch = []
-            Finalavg =[]
+            
         #       calculate average 
             if g % epoch == 0:
                 #epochaverages = [0,1]
-                epochaverages=[]
-                for i in range(resource+3):
-                    a=0
-                    for j in range(popsize):
-                        a+=Algaearray[j][i]
-                    epochaverages.append(a/popsize)
-#                print(epochaverages)
-                runPepoch.append(epochaverages)
-                         
-            RUNPepoch.append(runPepoch)
+                #epochaverages=[]
+                fitnessEpoch=[]
+                a=0
+                for j in range(popsize):
+                    a+=Algaearray[j][resource+2]
+                    fitnessEpoch.append(Algaearray[j][resource+2])
+                mini=np.amin(fitnessEpoch)
+                maxi=np.amax(fitnessEpoch)
+                minimum.append(mini)
+                maximum.append(maxi)
+#                    print(mini)
+#                    print(maxi)
+                #epochaverages.append(a/popsize)
+                #print(epochaverages)
+                for t in range(popsize):
+                    Algaearray[t][resource+2]=0          
+                runPepoch.append(a/popsize)
+            #this may need to be indented
+                
+             #   print(Algaearray)
+#        print('These are the averages of each epoch:', runPepoch)
+#        print(fitnessEpoch)
+#        print('These are the maximum values for each epoch:',maximum)
+#        print('These are the minimum values for each epoch:',minimum)
+
+            #RUNPepoch.append(runPepoch)
             #print(RUNPepoch)
             #print(runPepoch)
             
@@ -207,37 +225,26 @@ def main():
 #            Finalavg.append(epochrunaverages)  
         
 #---------------------Plot
-        #    print(Finalavg)
-        #    limit=int(generations/epoch) + 1
-        #
-        #    fig = plt.figure(figsize=(10,10))
-        #    ax = fig.add_subplot(111)
-        #    ax.set_prop_cycle(plt.cycler('color', plt.cm.Accent(np.linspace(0, 1, limit))))  
-        #    x = np.arange(0,money)
-        #
-        #    for a in Finalavg:
-        #        plt.plot(x, a)
-        #        plt.axis([0, money, 0, money])
-        #    plt.show()
-        #    fig = plt.figure(figsize=(8,8))
-        #    ax = fig.add_subplot(111)
-        #    ax.set_prop_cycle(plt.cycler('color', plt.cm.Accent(np.linspace(0, 1, limit))))  
-        # #   x = np.arange(0,money)
-        #    print(Finalavg)
-        #    
-        #    for a in Finalavg:
-        #        plt.plot(a)
-        #        plt.axis([0, generations/epoch, 0, money])
-        #    plt.show()
+         
+#           plt.figure(figsize = (8,8))        
+#    print(runPepoch)
+    plt.plot(maximum, color='C2')
+    plt.plot(minimum, color='C3')
+    plt.plot(runPepoch, color='C4')
         
-#           plt.figure(figsize = (8,8))
-#    plt.title('Absorbance level vs Time')
-#    plt.axis([0,gens/epoch,0,1000])
-#    plt.xlabel("Generation x 10")
-#    plt.ylabel("Absorbance")
+    maxmax=np.amax(maximum)
+    xaxis="Generation x " + str(epoch)    
+    plt.xlabel(xaxis)
+    plt.ylabel("Fitness")
+    plt.title("Population Fitness of Algae vs. Time")    
+    plt.legend(['maximum', 'minimum', 'average'], loc='upper left')
+    plt.axis([0,generations/epoch,0,(5*maxmax)/4])
+    plt.show()
+            
+
 #    plt.errorbar(np.arange(0,gens/epoch,1),femalerunepochmeans, yerr = femalerunepochcis, color = 'blue')
 #    plt.errorbar(np.arange(0,gens/epoch,1),malerunmaepochmeans, yerr = malerunmaepochcis, color = 'green')
 #    plt.errorbar(np.arange(0,gens/epoch,1),malerundepochmeans, yerr = malerundepochcis, color = 'red')    
-#    
-        #    
+   
+          
 main()
