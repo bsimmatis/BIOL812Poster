@@ -1,7 +1,6 @@
-This file is to outline the interpretations from each sub-project/research question.
+Note: This file is to outline the interpretations from each sub-project/research question.
 
 Question 1: Does chlorophyll a change over time in each lake?
-Yes (yay!!)
 
 Simulated data was generated according to a variation on Agent-based modelling (ABM) that is commonly used in ecology, referred to as individual-based modelling (IBM). In particular, using a modified game theoretical model, the parameter of resource division was used to simulate the evolution of an algae population in a lake according to individual behavior. The simulation predicts that the algae population will tend towards a population with a higher “fitness” score. Given how “fitness” was defined for this model, we may expect
 chlorophyll a to grow substantially. We compare these simulated results with the following field work data.
@@ -9,7 +8,8 @@ chlorophyll a to grow substantially. We compare these simulated results with the
 The most drastic changes are in the two eutrophic lakes, Muskrat and 08-160 (Stoco), where recent VRS-inferred chlorophyll a values are more than double reference conditions. This is likely related to cultural eutrophication, the addition of nutrients from human development, combined with regional climate warming.
 06-137 (Lac-des-Iles) is relatively stable through time, which is to be expected in a oligomesotrophic lake, but shows an increase in chlorophyll a in the most recent sediments. This may be related to regional climate warming or very recent anthropogenic watershed development.
 Interestingly, 06-133 (Duhamel) does not increase through time, but rather decreases at ~6cm (late-1800s); this may be related to increased zooplankton grazing pressure or a large erosional event diluting chlorophyll a in the sediments and/or clouding the water to preclude primary production, but further paleolimnological studies are required to determine the cause of the drastic decline.  
-Related figures are MUSK_chla_plot.jpeg, LP06133_chla_plot.jpeg, LP08160_chla_plot.jpeg, and LP06137_chla_plot.jpeg.
+
+Note: Related figures are MUSK_chla_plot.jpeg, LP06133_chla_plot.jpeg, LP08160_chla_plot.jpeg, and LP06137_chla_plot.jpeg.
 Other figures (showing the spectra and density of points) demonstrate the range of absorbance values available ("FullSpec" plots) vs the spectrum of Photosyntheically Active Radiation (PAR, 400-700nm wavelengths; "ChlaSpec" plots).
 
  
