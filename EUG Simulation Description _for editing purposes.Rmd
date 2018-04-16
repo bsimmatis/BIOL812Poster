@@ -1,0 +1,152 @@
+---
+title: "Evolutionary game theory: A modified Ultimatum game model with algae as players"
+author: "BIOL812"
+date: "April 20, 2018"
+output: html_document
+---
+
+## 1 What is the Ultimatum Game (UG)?
+
+The Ultimatum Game (UG) is game theoretical model of fairness and is a focal point for studies in the
+evolution of social behaviour. In the UG, two players must decide on the division of resources. In contrast to
+the predictions of traditional game theory, participants appear to make irrational decisions; participants tend
+to divide the resources equally and would rather suffer a loss than to accept an unfair division. Here, we
+investigate a new UG theoretical model for the evolution of fairness, the Enhanced Ultimatum Game (EUG)
+where we introduce a cost associated with a demand.
+This model and other agent-based models are not limited to predicting human behaviour. Past studies have
+included such models to simulate behaviour of animals (Karsaia, Montanoa and Schmicklb,2016), plants
+(King, D. 1990), molecules (Bohl et al. (2014)) and more (Oswald & Schmikl, 2017; Zahadat and Schmickl
+(2016)). In these instances, what is of interest is the interaction of the members within a population and the
+changes that occur. It is my understanding that, if a particular population evolves via interactions of the
+members within its group, then the UG model may be applied.
+For the purpose of a simple description, let’s consider how the UG game would be applied to people. The
+Ultimatum Game (UG) involves two players, the proposer and the responder, deciding on how to divide a
+resource between them. The proposer first offers an amount to the responder. If the responder accepts the
+offer then the resource is divided according to the proposal. If the offer is rejected then both players walk
+away with nothing.
+In the Enhanced Ultimatum Game (EUG), the responder takes on an additional role as the demander. In
+this version, the responder first makes a demand for how to divide the resources and the proposer will then
+make an offer. The responder will then accept, with a cost, or reject.
+The EUG models fairness as both players have the opportunity to be fair, split the resource evenly, or unfair,
+attempt to take a larger portion. Rejection of an unfair offer is interpreted as a form of punishment for
+deviating from fairness. A truly rational player would seek to maximize their payoff and should accept any
+offer which results in a positive payoff, fair or unfair, and to demand as much as possible. However, several
+models have shown that participants commonly make fair offers and reject unfair offers, leading to fairness as
+a potential evolutionary outcome.
+The EUG incorporates a demand and cost into the game and is played between two participants as follows:
+• There are n dollars to be divided
+• The responder demands an amount d such that $0 < d < n$
+• The proposer then makes an offer p
+• The responder has a minimum, M, that they are willing to accept such that M  d
+• There is a cost to not giving a d = M. cost = c(d −M), c > 0.
+• If p  M then the dollars are divided accordingly. If P > M then both receive zero dollars
+
+## 2 How has the UG model been modified for this project? How is this model unique from literature?
+
+The EUG model is a modified version of the model found within the literature, the UG model. Also, for this
+project, we are interested in the amount of Chlorophyll a within a lake and so, for the simulation, algae will
+act as the players in the EUG model. Also, several factors influence the evolution of chlorophyll in an algae
+population (ie. nutrients, sunlight, total phosphate etc). For instance, Total Phosphate (TP) found within
+a lake is thought to influence the quantity of a type of algae and sun exposure is associated with specific
+chlorophyll types. Therefore, for the purposes of this project, one may view TP and sunlight exposure as the
+resource to be divided in the EUG model. This will allow us to make predictions about the group research
+question: Whether the quantity of Chlorophyll a changes over time in a lake, given a particular environment.
+
+## 3 Brief description of simulation
+
+The simulated data will be generated according to a variation on Agent-based modelling (ABM) that is
+commonly used in ecology, referred to as invidivual-based modelling (IBM) . In particular, we shall use
+the parameter of resource division to simulate the evolution of an algae population in a lake according to
+individual behavior. The data obtained will be used to make predictions about how an enviroment may
+change with respect to Chlorophyll a, given certain environmental conditions and an initial measure of
+Chlorophyll a.
+
+## 4 In what program was the model coded?
+
+The main code was created in python.
+
+## 5 What are the parameters?
+
+There are several possibilities (perhaps infinite) for parameter settings and so in the initial stages I was
+working out exactly what I wanted to analyse. Below is a list of the more interesting ways the simulation was
+altered:
+• Created a data set from various distributions (ie. poisson distribution and varied lambda)
+• Varied the cost parameter (ie. instead of n(D-MA) for some n>0, I tried n(D-2P+MA) for some n>0
+etc).
+• Introduced a resource probability parameter such that the resource available to any one alga would
+vary according to a normal distribution.
+• Created an algae-type parameter (based on chlorophyll a vs. b) that was associated with proposal
+values.
+• there ended up being many versions of this code!
+Only a few graphs are stored within the folder titled ‘Plots with varying parameters’ as it is not meant to be
+the main point of interest for this project.
+For the graph displayed on the poster, the following parameters were used:
+• resource = 20 (Amount of resource to be divided)
+• cost = 2 (Cost for demanding more than MA)
+2
+• runs = 1 (Number of interactions)
+• popsize = 100 (population size/Number of algae)
+• generations = 1000 (Number of generations)
+• tsize = 4 (Tournament size)
+• pmr=0.05 (Point mutation rate for proposal)
+• mdr=0.5 (Point mutation rate for demand and MA)
+• epoch=20
+
+## 6 Algorithm/psuedocode
+
+Below is a outline/description of the python code:
+{1} Import necessary packages (numpy and matplotlib.pyplot)
+{2} Define variables (resource, cost, runs, popsize, generations, tsize, pmr, mdr, epoch)
+{3} Create main loop.
+i) Create characteristics of population: create an array for each alga within the population.
+Within each array describes the structure of the alga. The array contains 23 cells
+[3,4,2,6,2,14,15,13,2,6,7,8,6,4,3,3,7,8,9,9,7,18,0]. The first 20 cells correspond to proposal values that
+the alga will make, dependent on the demands. For example, if a second agla demands 3, then the
+first alga will propose the amount found in the 4th cell of the array. If the second alga demands 4,
+then the first alga will propose the amount found in the 5th cell of its array, and so on. The 21st
+cell is the alga’s minaccept value, the 22nd is it’s demand value, and the 23rd slot is it’s fitness
+score. Suppose there is a population of n algae then n 23 celled arrays are created.
+ii) Population interacts: Have each member of the population interact with all other members of the
+population twice, once as the demander and again as the proposer. Calculate and append fitness
+scores. Continue for g generations.
+iii) Point mutation: Pull out a few members of the population, choose the two members with the highest
+fitness scores and have them produce two "offspring" that will replace two existing algae that have
+the lowest fitness scores.
+iv) Stats: calculate average, minimum and maximum fitness scores across epochs
+v) Plot: Create graph of maximum, minimum, and average fitness scores vs epoch
+
+## 7 How were the parameters varied?
+
+For the graph displayed on the poster, all values found in the section of this paper titled “What are the
+parameters” were varied. However, I eventually fixed most values, as mentioned, except for the “runs”,
+“generations” and “epochs” variables. I varied the parameters within the range that the memory of my
+computer would allow (approx. 0 - 100,000 units).
+
+## 8 Any interesting findings?
+It has proven difficult (or thought provoking?) to interpret a couple of the results. I found what presents
+as an expected Nash equilibrium such that a population will remain stable if members of the population accept anything while demanding as much as possible. This is seen in the plot (albeit labelled incorrectly as
+Absorbance) where the minaccept(green) is reducing over time but the demand (blue) is slightly higher. It
+can be seen that this trend continues when increasing the number of generations. However, if the parameters
+are altered, the findings match closer to what we would expect to be found with people and the division of
+resource. In this case, the strategy that appears to dominate the population is one that is offering a 50/50
+split of the resource.This can be seen in the Proposalvsdemand plot where the amount proposed is half the
+resource.
+The main finding: The simulation predicts that the algae population will tend towards a population with
+a higher “fitness” score. Given how “fitness” was defined for this model, we may expect the quantiy of
+chlorophyll a to grow substantially, as higher fitness implies more algae which implies more chlorophyll a. It’s
+also interesing to note that the “fitness” score grows but appears to stabilize at a fixed value, suggesting
+an equilibrium is met. It’s possible that the lake reaches a carrying capacity which could explain the fixed
+value. Likely what we’re seeing is a particular type of algae (or some symbiotic relationship or a characteristic
+shared) dominating the population.
+
+## 9 References
+
+(For a complete list of references, see the “Literature” folder)
+Carlson, R.E. and J. Simpson. 1996. A Coordinator’s Guide to Volunteer Lake Monitoring Methods. North
+American Lake Management Society. 96 pp.
+Bohl, Katrin, Sabine Hummert, Sarah Werner, David Basanta, Andreas Deutsch, Stefan Schuster, and Anja
+Schroeter. 2014. “Evolutionary Game Theory: Molecules as Players.” Mol. BioSyst. 10 (12). Royal Society
+of Chemistry (RSC): 3066–74. doi:10.1039/c3mb70601j.
+Zahadat, Payam, and Thomas Schmickl. 2016. “Division of Labor in a Swarm of Autonomous Underwater
+Robots by Improved Partitioning Social Inhibition.” Adaptive Behavior 24 (2). SAGE Publications: 87–101.
+doi:10.1177/1059712316633028.
