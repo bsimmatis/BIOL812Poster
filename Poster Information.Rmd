@@ -15,9 +15,6 @@ knitr::opts_chunk$set(echo = TRUE)
 * Monitoring is typically reactive and starts after an impact has already occurred  
   + For example: large cyanobacterial blooms are detected so studies examine nutrient sources and modern lake water chemistry.  
 
-## Model
-Simulated data was generated according to an individual-based game-theoretical model. The parameter of resource division was used to simulate the evolution of an algae population in a lake according to individual behavior. The simulation predicts that the algae population will tend towards a population that produces more chlorophyll *a*. It is of interest to compare the model with the field work data collected.
-
 ## Paleolimnology  
 * Uses biological, physical and chemical indicators preserved in lake sediments to reconstruct past environmental changes.  
 * Visible Range Spectroscopy (VRS) can be used to infer past whole-lake the concentrations of chlorophyll *a* and its degradation products.  
@@ -28,23 +25,16 @@ Simulated data was generated according to an individual-based game-theoretical m
   
 We aim to explore the environmental histories of previously unmonitored lakes to inform local lake managers and present exploratory results from the application of machine learning to paleolimnological spectral data and chlorophyll *a* reconstructions.
   
-1. Does chlorophyll *a* change over time in each lake?  
+1. Does chlorophyll *a* change over time in each lake?
++ Are increases in chlorophyll a represented by a model using an ultimatum game simulation?
 2. Can we differentiate absorbance values from lakes grouped by trophic status or depth using machine learning?
 + If so, are the primary differences in the photosynthetically active radiation (PAR) range, or are they in other biologically-relevant spectra?
   
 ## Methods  
 
-* Cores were dated at PEARL via gamma spectroscopy and calculated using a Constant Rate of Supply (CRS) Model using ^210^Pb activities. 
-* A Model 6500 series Rapid Content Analyzer at PEARL was used to produce the absorbance values for our study lakes.
+Lake sediment cores were taken, subsampled and dated (constant rate of supply model) using standard paleolimnological methods. A Model 6500 series Rapid Content Analyzer at the Paleoecological Environmental Assessment and Research Lab (Queen’s University, Kingston, ON) was used to produce the absorbance values for our study lakes and chlorophyll inferred using standard methods. Simulated data was generated according to a variation on Agent-based modelling (ABM) that is commonly used in ecology, referred to as individual-based modelling (IBM). In particular, using a modified game theoretical model, the parameter of resource division was used to simulate the evolution of an algae population in a lake according to individual behavior.
 
-### Data Layout 
-#### PAR Layout
-* **Column 1-51**: values from the spectrophotometer for wavelengths 400-2500nm, measured every 2nm.
-* **Column 52**: Midpoint depth of the sediment interval.
-
-#### FullVRS Layout
-* **Column 1**: Sampled wavelengths (400-2500nm).
-* **Column 2-n**: Absorbance values for sampled intervals (in first row as midpoint depth in cm).
+LEIF'S METHODS
 
 ## Study Sites
   
@@ -56,19 +46,36 @@ Duhamel | 26m | Oligotrophic | Canadian Shield
 Lac-des-Iles | 37m | Oligo-mesotrophic | Canadian Shield  
 
 
-```{r}
-  
-# Collin's code and maps here
+```
+Figures: 
 
+Collin's Map
+
+For the full spectrum (blue and yellow) plots: 
+“Figure 1. Absorbance values for the 400-2500nm wavelengths obtained from a Near-Infrared Spectrophotometer (NIRS) for (a) Duhamel, (b) des-Iles, (c) Stoco, and (d) Muskrat Lakes. Older samples are displayed in blue, with most recent sediments in yellow.”
+
+For the PAR plots:
+“Figure 2. Absorbance values for the Photosynthecially Active Range (wavelengths 650-700nm) obtained from a Near-Infrared Spectrophotometer (NIRS) for (a) Duhamel, (b) des-Iles, (c) Stoco, and (d) Muskrat Lakes. Older samples are displayed in purple, with most recent sediments in yellow.”
+
+For the chl a plots:
+“Figure 3. VRS-inferred chlorophyll a (x-axis) through the depth of the core (y-axis) for (a) Duhamel, (b) des-Iles, (c) Stoco, and (d) Muskrat Lakes. The most recently deposited sediment is at 0cm inferred-chlorophyll a is expressed in mg/g dry sediment weight.”
+
+For the game theory simulation results:
+"Figure 4. Data obtained from an ultimatum game simulation with initial population = 500, epoch = 5 generations and non-zero mutation rates. The fitness score of an alga correlates to its production of cholorophyll a."
+
+For the "fingerprinting" figures:
+"Figure 5. LEIF'S CAPTION"
 ```
 
-## Description of Results
+## Results and Interpretations
 
+The simulation predicts that the algae population will tend towards a population that produces more chlorophyll a through increased population size, which is primarily what was observed in the focal lakes. From the sediment cores, the most drastic changes are in the two eutrophic lakes, Muskrat and Stoco, where recent VRS-inferred chlorophyll a values are more than double reference conditions. This is likely related to cultural eutrophication, the addition of nutrients from human development, combined with regional climate warming. Lac-des-Iles is relatively stable through time, which is to be expected in a oligo-mesotrophic lake, but shows an increase in chlorophyll a in the most recent sediments. This may be related to regional climate warming or very recent anthropogenic watershed development.  
 
-## Conclusion
+Interestingly, chlorophyll a at Duhamel does not increase through time and therefore does not necessarily follow the ultimatum game prediction. Instead, chlorophyll a decreases at ~6cm (corresponding to the late-1800s); this may be related to increased zooplankton grazing pressure or a large erosional event diluting chlorophyll a in the sediments and/or clouding the water to preclude primary production, but further paleolimnological studies are required to determine the cause of the drastic decline.  
 
+LEIF'S RESULTS HERE  
 
-
+For the majority of our focus lakes, chlorophyll a is increasing as is expected with climate change and eutrophication; Lac-des-Iles is an exception that have other factors decreasing recent chlorophyll a concentrations. Further, simulated data from an ultimatum game model shows that algal populations will likely increase in size, and therefore be represented by higher VRS-inferred chlorophyll a concentrations in the sedimentary record, as time progresses. LEIF'S INTERPRETATIONS HERE. This information may be useful to guide future lake management decisions regarding the control of algal blooms and eutrophication. It is likely that increased algal biomass will propagate or perpetuate water quality degradation in Boreal Shield lakes as human watershed development places multiple stressors on freshwater systems.
 
 ## References
 Michelutti N, Blais JM, Cumming BF, Paterson AM, Ruhland K, Wolfe AP, Smol JP (2010) Do spectrally inferred determinations of chlorophyll a reflect trends in lake trophic status? Journal of Paleolimnology 43: 208-217
