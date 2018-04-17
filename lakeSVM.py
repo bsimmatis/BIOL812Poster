@@ -323,7 +323,7 @@ for z0 in np.arange(0,z0Max):
                 if t==0:
                     X=X[:, 0]
                 elif t>0:
-                    X[:, np.append(paramArray,k-1)]
+                    X=X[:, np.append(paramArray,k-1)]
                     
                 y0=[y[sc] for sc in scramble]
                 numTrue=np.sum(y0)
@@ -493,20 +493,3 @@ ax1.set_ylabel('Models included in (%)')
 ax1.set_xlabel("Sediment age (years)")
 plt.draw()
 plt.pause(1)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
