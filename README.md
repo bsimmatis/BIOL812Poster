@@ -37,7 +37,6 @@ The simulated data was generated according to a variation on Agent-based modelli
 * Chlorophyll a plot codes (using ggplot2 in R)
 * Full wavelength range codes, with plot options for raw data, density, and raster images (using ggplot2 in R)
 * Code to generate map of sediment cores
-* [LEIF'S INFO HERE]
 * Simulation: Python code for game theoretical mathematical model. 
 
 ### References
