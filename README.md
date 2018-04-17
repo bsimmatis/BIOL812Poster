@@ -18,18 +18,114 @@ This repository includes R and Python code to address these questions, depending
 4. Muskrat Lake (maximum depth 60m) is valued for its recreational use and as a drinking water source for the town of Cobden, Ontario, located at the south end of the lake. High total phosphorus (>40 μg/L), low water clarity, and algal blooms have raised water quality concerns, largely attributed to eutrophication from heavy agricultural watershed development.
 
 #### Data Collection and Content
+
+##### Field Work Data
 Paleolimnological approaches use a variety of biological, physical and chemical indicators preserved in lake sediments to reconstruct past environmental conditions (Smol, 2008). Visible range spectroscopy (VRS) can track past changes in whole lake primary production by tracking sedimentary chlorophyll a and its degradation products, providing information on shifts in lake trophic status (Michelluti et al., 2010). Most cores were collected and had the sediment-water interface stabilized with Zorbitol© before refrigerated shipment to Université Laval, Laval, QC. Cores were then split and stored in a cold room (<4°C) prior to shipment to PEARL, Queen’s University, Kingston, ON. Individual intervals of freeze-dried sediment have been dated via gamma spectroscopy at Queen’s University using unsupported 210Pb activities in a constant rate of supply (CRS) model (Appleby and Oldfield, 1978; Binford 1990). Freeze-dried sediments have been sieved (120µm mesh) and sub-sampled such that a 50mL glass scintillation vial has at least 1mm of sediment. The sediments have been scanned through the base of the glass vials using a Rapid Content Analyzer (FOSS NIRSystems Inc.) operating over a range of 400-2,500 nm.
   
 The data is comprised of a series of absorbance values from 400-2,500nm through time, which broadly represents the proportion of organic matter in the sediment. The absorbance values demonstrate the type of algae present in the lake depending on where absorbance peaks through the spectra (e.g. chlorophyll a is expected to occur between 650-700nm, representing whole-lake primary production). Each sediment interval has 2100 values and each lake core can have over 30 intervals of sediment stored in 2D datasets. Our largest data set, Muskrat Lake, has 71 intervals of sediment with 2100 values per interval for a total of ~72 000 data points. 
 
-The simulated data was generated according to a variation on Agent-based modelling (ABM) that is commonly used in ecology, referred to as invidivual-based modelling (IBM). In particular, using a modified game theoretical model, the parameter of resource division was used to simulate the evolution of an algae population in a lake according to individual behavior. The data obtained was used to make predictions about how an enviroment may change with respect to Chlorophyll a, given certain environmental conditions and an initial measure of Chlorophyll a.
+##### Simulated Data
+###### 1 What is the Ultimatum Game (UG)?
+
+The Ultimatum Game (UG) is game theoretical model of fairness and is a focal point for studies in the
+evolution of social behaviour. In the UG, two players must decide on the division of resources. Here, we
+investigate a new UG theoretical model for the evolution of fairness, the Enhanced Ultimatum Game (EUG)
+where we introduce a cost associated with a demand.
+This model and other agent-based models are not limited to predicting human behaviour. What is of interest is the interaction of the members within a population and the changes that occur. It is my understanding that, if a particular population evolves via interactions of the members within its group, then the UG model may be applied.
+The Ultimatum Game (UG) involves two players, the proposer and the responder, deciding on how to divide a
+resource between them. The proposer first offers an amount to the responder. If the responder accepts the
+offer then the resource is divided according to the proposal. If the offer is rejected then both players walk
+away with nothing.
+In the Enhanced Ultimatum Game (EUG), the responder takes on an additional role as the demander. In
+this version, the responder first makes a demand for how to divide the resources and the proposer will then
+make an offer. The responder will then accept, with a cost, or reject.
+
+The EUG incorporates a demand and cost into the game and is played between two participants as follows:
+
+- There are n dollars to be divided
+- The responder demands an amount d such that 0 < d < n
+- The proposer then makes an offer p
+- The responder has a minimum, M, that they are willing to accept such that M <= d
+- There is a cost to not giving a d = M. cost = c(d −M), c > 0.
+- If p <= M then the dollars are divided accordingly. If p > M then both receive zero dollars
+
+For this project, we are interested in the amount of Chlorophyll a within a lake and so, for the simulation, algae will
+act as the players in the EUG model. Also, several factors influence the evolution of chlorophyll in an algae
+population (ie. nutrients, sunlight, total phosphate etc). For instance, Total Phosphate (TP) found within
+a lake is thought to influence the quantity of a type of algae and sun exposure is associated with specific
+chlorophyll types. Therefore, for the purposes of this project, one may view TP and sunlight exposure as the
+resource to be divided in the EUG model. This will allow us to make predictions about the group research
+question: Whether the quantity of Chlorophyll a changes over time in a lake, given a particular environment.
+
+###### 2 Brief description of simulation
+
+The simulated data will be generated according to a variation on Agent-based modelling (ABM) that is
+commonly used in ecology, referred to as invidivual-based modelling (IBM). In particular, we shall use
+the parameter of resource division to simulate the evolution of an algae population in a lake according to
+individual behavior. The data obtained will be used to make predictions about how an enviroment may
+change with respect to Chlorophyll a, given certain environmental conditions and an initial measure of
+Chlorophyll a.
+
+###### 3 What are the parameters?
+
+There are several possibilities (perhaps infinite) for parameter settings and so in the initial stages I was
+working out exactly what I wanted to analyse. Below is a list of the more interesting ways the simulation was
+altered:
+- Created a data set from various distributions (ie. poisson distribution and varied lambda)
+- Varied the cost parameter (ie. instead of n(D-MA) for some n>0, I tried n(D-2P+MA) for some n>0
+etc).
+- Introduced a resource probability parameter such that the resource available to any one alga would
+vary according to a normal distribution.
+- Created an algae-type parameter (based on chlorophyll a vs. b) that was associated with proposal
+values.
+
+For the graph displayed on the poster, the following parameters were used:
+- resource = 20 (Amount of resource to be divided)
+- cost = 2 (Cost for demanding more than MA)
+- runs = 1 (Number of interactions)
+- popsize = 100 (population size/Number of algae)
+- generations = 1000 (Number of generations)
+- tsize = 4 (Tournament size)
+- pmr=0.05 (Point mutation rate for proposal)
+- mdr=0.5 (Point mutation rate for demand and MA)
+- epoch=20
+
+###### 4 Algorithm/psuedocode
+
+Below is a outline/description of the python code:
+1. Import necessary packages (numpy and matplotlib.pyplot)
+2. Define variables (resource, cost, runs, popsize, generations, tsize, pmr, mdr, epoch)
+3. Create main loop.
+    1. Create characteristics of population: create an array for each alga within the population.
+Within each array describes the structure of the alga. The array contains 23 cells
+[3,4,2,6,2,14,15,13,2,6,7,8,6,4,3,3,7,8,9,9,7,18,0]. The first 20 cells correspond to proposal values that
+the alga will make, dependent on the demands. For example, if a second agla demands 3, then the
+first alga will propose the amount found in the 4th cell of the array. If the second alga demands 4,
+then the first alga will propose the amount found in the 5th cell of its array, and so on. The 21st
+cell is the alga’s minaccept value, the 22nd is it’s demand value, and the 23rd slot is it’s fitness
+score. Suppose there is a population of n algae then n 23 celled arrays are created.
+    2. Population interacts: Have each member of the population interact with all other members of the
+population twice, once as the demander and again as the proposer. Calculate and append fitness
+scores. Continue for g generations.
+    3. Point mutation: Pull out a few members of the population, choose the two members with the highest
+fitness scores and have them produce two "offspring" that will replace two existing algae that have
+the lowest fitness scores.
+    4. Stats: calculate average, minimum and maximum fitness scores across epochs
+    5. Plot: Create graph of maximum, minimum, and average fitness scores vs epoch
+
+###### 5 How were the parameters varied?
+
+For the graph displayed on the poster, all values found in the section of this paper titled “What are the
+parameters” were varied. However, I eventually fixed most values, as mentioned, except for the “runs”,
+“generations” and “epochs” variables. I varied the parameters within the range that the memory of my
+computer would allow (approx. 0 - 100,000 units).
 
 #### Data Included in this Repository:
 * Dating profiles for each sediment core, which was generated using a constant rate of 210-Pb supply model via ScienTissiME
 * Full spectrum absorbance values for four lakes
 * "Chlorophyll a" spectrum (650-700nm) absorbance values for four lakes
 * Location information for the focal lakes
-* Description of the model and simulated data can be found in the "Biol 812 Group Project" folder
+* Simulated data of algae population
 
 
 #### Code Included in this Repository:
