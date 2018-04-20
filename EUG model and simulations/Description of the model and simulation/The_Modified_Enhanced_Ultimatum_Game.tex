@@ -25,7 +25,6 @@
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Evolutionary game theory: A modified Ultimatum game model with algae as players},
-            pdfauthor={Stefanie Knebel},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -77,9 +76,8 @@
 players}
   \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \author{Stefanie Knebel}
-  \preauthor{\centering\large\emph}
-  \postauthor{\par}
+  \author{}
+  \preauthor{}\postauthor{}
   \predate{\centering\large\emph}
   \postdate{\par}
   \date{2018}
@@ -88,6 +86,11 @@ players}
 
 \begin{document}
 \maketitle
+
+We have created a mathematical model, the Enhanced Ultimatum Game, and
+have written a script in python of the model. The simulation may be used
+to predict how an algae population will evolve and, in turn, how much
+chlorophyll a we may expect.
 
 \section{What is the Ultimatum Game
 (UG)?}\label{what-is-the-ultimatum-game-ug}
@@ -98,9 +101,8 @@ two players must decide on the division of resources. In contrast to the
 predictions of traditional game theory, participants appear to make
 irrational decisions; participants tend to divide the resources equally
 and would rather suffer a loss than to accept an unfair division. Here,
-we investigate a new UG theoretical model for the evolution of fairness,
-the Enhanced Ultimatum Game (EUG) where we introduce a cost associated
-with a demand.
+we investigate a new UG theoretical model, the Enhanced Ultimatum Game
+(EUG) where we introduce a cost associated with a demand.
 
 This model and other agent-based models are not limited to predicting
 human behaviour. Past studies have included such models to simulate
@@ -126,26 +128,32 @@ makes a demand for how to divide the resources and the proposer will
 then make an offer. The responder will then accept, with a cost, or
 reject.
 
-The EUG models fairness as both players have the opportunity to be fair,
-split the resource evenly, or unfair, attempt to take a larger portion.
-Rejection of an unfair offer is interpreted as a form of punishment for
-deviating from fairness. A truly rational player would seek to maximize
-their payoff and should accept any offer which results in a positive
-payoff, fair or unfair, and to demand as much as possible. However,
-several models have shown that participants commonly make fair offers
-and reject unfair offers, leading to fairness as a potential
-evolutionary outcome.
+In the case of an algae population, there is limited resource available
+within an environment which is to be divided among the algae. There
+exists competition for resources and certain types of algae will be more
+likely to succeed given particular enviroments. The UG model provides a
+method for classifying types of algae and how interaction may evolve the
+population. For instance, let's consider surface area of an alga X and
+suppose one of the resources to be divided is the sun. Suppose X has the
+largest surface area compared to other members in the population. Since
+surface area will play a large role in dictating the amount of nutrients
+algae may absorb from the sun, X is at advantage in this regard. We may
+interpret X as having a high Demand. Next suppose X is shaded from the
+sun for a finite amount of time. If X has some other means of obtaining
+necessary nutrients then it will continue to thrive. We may interpret X
+as having a low Min accept. X then has the best strategy and is more
+likely to survive and dominate a population.
 
 The EUG incorporates a demand and cost into the game and is played
 between two participants as follows:
 
 \begin{itemize}
-    \item There are $n$ dollars to be divided 
+    \item There are $n$ resources to be divided 
     \item The responder demands an amount $d$ such that $0<d<n$
     \item The proposer then makes an offer $p$
-    \item The responder has a minimum, $M$, that they are willing to accept such that $M \leq d$
-    \item There is a cost to not giving a $d = M$. cost $= c(d-M)$, $c>0$.
-    \item If $p \leq M$ then the dollars are divided accordingly. If $P>M$ then both receive zero dollars
+    \item The responder has a minimum $M$ that they are willing to accept such that $M \leq d$
+    \item There is a cost to the responder when $d \neq M$. The cost is $c(d-M)$ where $c>0$
+    \item If $p \leq M$ then the resources are divided accordingly. If $P>M$ then both receive zero resources
 \end{itemize}
 
 \section{How has the UG model been modified for this project? How is
@@ -198,9 +206,9 @@ simulation was altered:
     \item there ended up being many versions of this code! 
 \end{itemize}
 
-Only a few graphs are stored within the folder titled `Plots with
-varying parameters' as it is not meant to be the main point of interest
-for this project.
+The main and more interesting graphs are stored within the folder titled
+`Plots with varying parameters'. I may share more, if they are of
+interest.
 
 For the graph displayed on the poster, the following parameters were
 used:
@@ -208,18 +216,18 @@ used:
 \begin{itemize}
   \item resource = 20           (Amount of resource to be divided)
   \item cost = 2              (Cost for demanding more than MA)
-  \item runs = 1                (Number of interactions)
-  \item popsize = 100          (population size/Number of algae)
-  \item generations = 1000       (Number of generations)
+  \item runs = 10                (Number of interactions)
+  \item popsize = 500          (population size/Number of algae)
+  \item generations = 500       (Number of generations)
   \item tsize = 4              (Tournament size)
   \item pmr=0.05            (Point mutation rate for proposal)
   \item mdr=0.5             (Point mutation rate for demand and MA)
-  \item epoch=20
+  \item epoch=5
 \end{itemize}
 
 \section{Algorithm/psuedocode}\label{algorithmpsuedocode}
 
-Below is a outline/description of the python code:
+Below is an outline/description of the python code:
 
 \begin{enumerate}[\{1\}]
 \item Import necessary packages (numpy and matplotlib.pyplot)
