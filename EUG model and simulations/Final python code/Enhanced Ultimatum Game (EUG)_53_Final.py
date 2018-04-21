@@ -4,13 +4,13 @@ import matplotlib.pyplot as plt
 #define variables
 resource = 20           #Amount of resource to be divided
 cost = 0              #Cost for demanding more than MA
-runs = 1                #Number of interactions
+runs = 1               #Number of interactions
 popsize = 100          #population size/Number of algae
-generations = 1000       #Number of generations
+generations = 500     #Number of generations
 tsize = 4              #Tournament size
 pmr=0.05            #Point mutation rate for proposal
 mdr=0.5             #Point mutation rate for demand and MA
-epoch=20               #Number of generations in an epoch
+epoch=5               #Number of generations in an epoch
 
 #def getKey1(item):
 #    return(item[money+2])
