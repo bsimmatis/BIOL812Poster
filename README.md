@@ -1,6 +1,6 @@
 # Broadening the spectra: looking beyond VRS-inferred chlorophyll a (650-700nm) to identify changes in whole-lake primary production
 ## Repository for BIOL812 Poster
-## Authors: C Juurakko, N Kharazian, S Knebel, B Simmatis, L Simmatis
+## Authors: C Juurakko, S Knebel, B Simmatis, L Simmatis
 ##### PLEASE DO NOT DISTRIBUTE DATA; DATA NOT PUBLISHABLE
 ### This repository was designed to store images, code and related information to generate a data poster for BIOL812 at Queen's University.
 
@@ -29,31 +29,41 @@ Most cores were collected and had the sediment-water interface stabilized with Z
 The data is comprised of a series of absorbance values from 400-2,500nm through time, which broadly represents the proportion of organic matter in the sediment. The absorbance values demonstrate the type of algae present in the lake depending on where absorbance peaks through the spectra (e.g. chlorophyll a is expected to occur between 650-700nm, representing whole-lake primary production). Each sediment interval has 2100 values and each lake core can have over 30 intervals of sediment stored in 2D datasets. Our largest data set, Muskrat Lake, has 71 intervals of sediment with 2100 values per interval for a total of ~72 000 data points. 
 
 ##### Simulated Data
-###### 1 What is the Ultimatum Game (UG)?
+We have created a mathematical model, the Enhanced Ultimatum Game, and have written a script in python
+of the model. The simulation may be used to predict how an algae population will evolve and, in turn, how
+much chlorophyll a we may expect.
 
-The Ultimatum Game (UG) is game theoretical model of fairness and is a focal point for studies in the
-evolution of social behaviour. In the UG, two players must decide on the division of resources. Here, we
-investigate a new UG theoretical model for the evolution of fairness, the Enhanced Ultimatum Game (EUG)
-where we introduce a cost associated with a demand.
-This model and other agent-based models are not limited to predicting human behaviour. What is of interest is the interaction of the members within a population and the changes that occur. It is my understanding that, if a particular population evolves via interactions of the members within its group, then the UG model may be applied.
-The Ultimatum Game (UG) involves two players, the proposer and the responder, deciding on how to divide a
-resource between them. The proposer first offers an amount to the responder. If the responder accepts the
-offer then the resource is divided according to the proposal. If the offer is rejected then both players walk
+###### 1 What is the Ultimatum Game (UG)?
+The Ultimatum Game (UG) is a game theoretical model that involves two players, the proposer and the responder, that must divide a resource between them. The proposer first "offers" an amount to the responder. If the responder "accepts" the
+offer then the resource is divided according to the proposal. If the offer is "rejected" then both players walk
 away with nothing.
-In the Enhanced Ultimatum Game (EUG), the responder takes on an additional role as the demander. In
+
+Here, we investigate a new UG theoretical model, the Enhanced Ultimatum Game (EUG) where we introduce a cost associated with a demand.
+In the EUG, the responder takes on an additional role as the demander. In
 this version, the responder first makes a demand for how to divide the resources and the proposer will then
 make an offer. The responder will then accept, with a cost, or reject.
 
+In the case of an algae population, there is limited resource available within an environment which is to be
+divided among the algae. There exists competition for resources and certain types of algae will be more
+likely to succeed given particular enviroments. The UG model provides a method for classifying types of
+algae and how interaction may evolve the population. For instance, let’s consider surface area of an alga X 
+and suppose one of the resources to be divided is sunlight. Suppose X has the largest surface area compared
+to other members in the population. Since surface area will play a large role in dictating the amount of
+nutrients algae may absorb from the sun, X is at an advantage in this regard. We may interpret X as having a
+high Demand. Next suppose X is shaded from the sun for a finite amount of time. If X has some other means
+of obtaining necessary nutrients then it will continue to thrive. We may interpret X as having a low Min
+accept. X then has the best strategy and is more likely to survive and dominate a population.
+
 The EUG incorporates a demand and cost into the game and is played between two participants as follows:
 
-- There are n dollars to be divided
+- There are n resources to be divided
 - The responder demands an amount d such that 0 < d < n
 - The proposer then makes an offer p
-- The responder has a minimum, M, that they are willing to accept such that M <= d
-- There is a cost to not giving a d = M. cost = c(d −M), c > 0.
-- If p <= M then the dollars are divided accordingly. If p > M then both receive zero dollars
+- The responder has a minimum M that they are willing to accept and it must be that M <= d
+- There is a cost to the responder when d != M. The cost is c(d−M) where c > 0
+- If p <= M then the resources are divided accordingly. If p > M then both receive zero resources
 
-For this project, we are interested in the amount of Chlorophyll a within a lake and so, for the simulation, algae will
+For this project, we are interested in the amount of chlorophyll a within a lake and so, for the simulation, algae will
 act as the players in the EUG model. Also, several factors influence the evolution of chlorophyll in an algae
 population (ie. nutrients, sunlight, total phosphate etc). For instance, Total Phosphate (TP) found within
 a lake is thought to influence the quantity of a type of algae and sun exposure is associated with specific
@@ -62,19 +72,15 @@ resource to be divided in the EUG model. This will allow us to make predictions 
 question: Whether the quantity of Chlorophyll a changes over time in a lake, given a particular environment.
 
 ###### 2 Brief description of simulation
-
 The simulated data will be generated according to a variation on Agent-based modelling (ABM) that is
 commonly used in ecology, referred to as invidivual-based modelling (IBM). In particular, we shall use
 the parameter of resource division to simulate the evolution of an algae population in a lake according to
 individual behavior. The data obtained will be used to make predictions about how an enviroment may
-change with respect to Chlorophyll a, given certain environmental conditions and an initial measure of
-Chlorophyll a.
+change with respect to chlorophyll a, given certain environmental conditions and an initial measure of
+chlorophyll a.
 
 ###### 3 What are the parameters?
-
-There are several possibilities (perhaps infinite) for parameter settings and so in the initial stages I was
-working out exactly what I wanted to analyse. Below is a list of the more interesting ways the simulation was
-altered:
+Below is a list of the more interesting ways the simulation was altered:
 - Created a data set from various distributions (ie. poisson distribution and varied lambda)
 - Varied the cost parameter (ie. instead of n(D-MA) for some n>0, I tried n(D-2P+MA) for some n>0
 etc).
@@ -86,16 +92,15 @@ values.
 For the graph displayed on the poster, the following parameters were used:
 - resource = 20 (Amount of resource to be divided)
 - cost = 2 (Cost for demanding more than MA)
-- runs = 1 (Number of interactions)
-- popsize = 100 (population size/Number of algae)
-- generations = 1000 (Number of generations)
+- runs = 10 (Number of interactions)
+- popsize = 500 (population size/Number of algae)
+- generations = 500 (Number of generations)
 - tsize = 4 (Tournament size)
 - pmr=0.05 (Point mutation rate for proposal)
 - mdr=0.5 (Point mutation rate for demand and MA)
-- epoch=20
+- epoch=5
 
 ###### 4 Algorithm/psuedocode
-
 Below is a outline/description of the python code:
 1. Import necessary packages (numpy and matplotlib.pyplot)
 2. Define variables (resource, cost, runs, popsize, generations, tsize, pmr, mdr, epoch)
@@ -118,7 +123,6 @@ the lowest fitness scores.
     5. Plot: Create graph of maximum, minimum, and average fitness scores vs epoch
 
 ###### 5 How were the parameters varied?
-
 For the graph displayed on the poster, all values found in the section of this paper titled “What are the
 parameters” were varied. However, I eventually fixed most values, as mentioned, except for the “runs”,
 “generations” and “epochs” variables. I varied the parameters within the range that the memory of my
@@ -142,6 +146,11 @@ computer would allow (approx. 0 - 100,000 units).
 ### References
 1. Appleby, P.G., and Oldfield, F. 1978. The calculation of lead-210 dates assuming a constant rate of supply of unsupported 210Pb to the sediment. Catena, 5:1-8.
 2. Binford, M. 1990. Calculation and uncertainty analysis of 210Pb dates for PIRLA project lake sediment cores. Journal of Paleolimnology, 3(3): 253-267.
-3. Biofilia (Consultants en Environnement). 2004. Diagnose de basin versant: Lac Duhamel, Ville de Mont-Tremblant. Rapport final (only available in French), URL: http://lacduhamel.ca/wp-content/uploads/2015/09/diagnose-bassin-versant.pdf, accessed 15 Nov 2017. 
-4. Enviro’Eau (Services-Conseils). 2009. Diagnose du Lac- des- Îles: Municipalité de Sain-Aimé-du-Lac-des- Îles et Ville de Mont-Laurier, Québec. Rapport final (only available in French), URL: www.villemontlaurier.qc.ca/DATA/DOCUMENT/Rapport et annexes-diagnose lac des Îles-2009.pdf, accessed 9 Nov 2017.
-5. Michelutti, N., Blais, J.M., Cumming, B.F., Paterson, A.M., Rühland, K., Wolfe, A.P., and Smol, J.P. 2010. Do spectrally inferred determinations of chlorophyll a reflect trends in lake trophic status? Journal of Paleolimnology, 143: 205–217.
+3. Biofilia (Consultants en Environnement). 2004. Diagnose de basin versant: Lac Duhamel, Ville de Mont-Tremblant. Rapport final (only available in French), URL: http://lacduhamel.ca/wp-content/uploads/2015/09/diagnose-bassin-versant.pdf, accessed 15 Nov 2017.
+4. Bohl, Katrin, Sabine Hummert, Sarah Werner, David Basanta, Andreas Deutsch, Stefan Schuster, and Anja
+Schroeter. 2014. “Evolutionary Game Theory: Molecules as Players.” Mol. BioSyst. 10 (12). Royal Society
+of Chemistry (RSC): 3066–74. doi:10.1039/c3mb70601j.
+5. Carlson, R.E. and J. Simpson. 1996. A Coordinator’s Guide to Volunteer Lake Monitoring Methods. North
+American Lake Management Society. 96 pp.
+6. Enviro’Eau (Services-Conseils). 2009. Diagnose du Lac- des- Îles: Municipalité de Sain-Aimé-du-Lac-des- Îles et Ville de Mont-Laurier, Québec. Rapport final (only available in French), URL: www.villemontlaurier.qc.ca/DATA/DOCUMENT/Rapport et annexes-diagnose lac des Îles-2009.pdf, accessed 9 Nov 2017.
+7. Michelutti, N., Blais, J.M., Cumming, B.F., Paterson, A.M., Rühland, K., Wolfe, A.P., and Smol, J.P. 2010. Do spectrally inferred determinations of chlorophyll a reflect trends in lake trophic status? Journal of Paleolimnology, 143: 205–217.
